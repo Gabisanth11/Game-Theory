@@ -73,8 +73,7 @@ elif b == V:
     st.write(pd.DataFrame(get_data()))
     
 
-
+##
 
 if st.button('Clear Data'):
-     st.legacy_caching.clear_cache()
      st.legacy_caching.clear_cache()
