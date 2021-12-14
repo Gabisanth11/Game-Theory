@@ -2,14 +2,26 @@ import streamlit as st
 import pandas as pd
 
 
-st.title("Second-Price, Sealed-Bid Simulator")
+st.title("Second-Price, Sealed-Bid Auction Simulator")
+
+st.subheader('by Group Noether')
+
+st.markdown("""---""")
 
 
-st.write("How to Use:")
+st.header("What is a Second-Price, Sealed-Bid?")
+st.write("A Vickrey auction, also known as second-price sealed-bid auction, is one in which the winner pays the second-highest price, not the price they themselves bid. ")
+st.write("This scheme was developed by William Vickrey, to show that in this “game” every “player” has a dominant strategy to bid their true valuation, as users will be able to observe here. It is also know as Vickrey’s Truth serum. [Ref: Games of Strategy by Dixit, Skeath, Reiley]")
 
-st.write("Set a constant value for the valuation and change the bid amount to see the payoffs for each case in the table below. From this table it will be shown that bidding your truthful valuation will never be worse, and sometimes better considering the payoff, meaning that this is a weakly dominant strategy.")
+st.text("")
+st.text(" ")
+with st.expander("How to use this app:"):
+    st.write("1. Set a value for your truthful valuation of the watch on the side bar.")
+    st.write("2. Click the 'Clear Data' button to clear data from the table. (You may need to press this twice in order for cache and data in table to be cleared. When you have only row 0 visible you are ready to start!) ")
+    st.write("3. With your valuation fixed, vary your bid values on the sidebar to see the payoffs being appended to the table below. (The metric on top of the table also shows the payoff for the current bid you have placed.)")
+    st.write("4. Experiment with bids lower, higher and also equal to your valuation to compare payoffs.")
+    
 
-st.write("The metric below shows the payoff for the current parameters you have selected.")
 #Your valuation.
 V = st.sidebar.number_input("Select your valuation of the watch:",100)
 
@@ -21,7 +33,7 @@ r = 400;
 
 st.sidebar.write("Rival Bid is £", r)
 
-
+st.markdown("""---""")
 
 @st.cache(allow_output_mutation=True)
 def get_data():
@@ -77,3 +89,8 @@ elif b == V:
 
 if st.button('Clear Data'):
      st.legacy_caching.clear_cache()
+
+st.markdown("""---""")
+
+with st.expander("Game Theory Explanation:"):
+    st.write("You will have observed that for all cases, the strategy of bidding your truthful valuation is never worse and in some cases better than the other solutions. This represents the weakly dominant stategy in this type of auction and therefore a Nash equilibrium in this situation (rival will observe the same weakly dominant strategy of bidding their truthful valuation).")
